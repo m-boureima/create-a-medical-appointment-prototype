@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Heart, Shield, Clock, Users } from "lucide-react";
 import { DoctorCard } from "@/components/DoctorCard";
 import { SearchBar } from "@/components/SearchBar";
@@ -86,7 +87,7 @@ const Index = () => {
           <nav className="hidden md:flex items-center gap-6">
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Find Doctors</a>
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Services</a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
+            <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">My Dashboard</Link>
           </nav>
         </div>
       </header>
