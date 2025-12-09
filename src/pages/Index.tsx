@@ -6,6 +6,7 @@ import { DoctorCard } from "@/components/DoctorCard";
 import { SearchBar } from "@/components/SearchBar";
 import { SpecialtyFilter } from "@/components/SpecialtyFilter";
 import { AppointmentModal } from "@/components/AppointmentModal";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 import doctor1 from "@/assets/doctor-1.jpg";
 import doctor2 from "@/assets/doctor-2.jpg";
@@ -95,6 +96,7 @@ const Index = () => {
                 Ask AI
               </Button>
             </Link>
+            <ThemeToggle />
           </nav>
         </div>
       </header>
