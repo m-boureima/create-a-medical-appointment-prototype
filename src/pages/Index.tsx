@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Shield, Clock, Users } from "lucide-react";
+import { Heart, Shield, Clock, Users, Bot } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { DoctorCard } from "@/components/DoctorCard";
 import { SearchBar } from "@/components/SearchBar";
 import { SpecialtyFilter } from "@/components/SpecialtyFilter";
@@ -88,6 +89,12 @@ const Index = () => {
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Find Doctors</a>
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Services</a>
             <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">My Dashboard</Link>
+            <Link to="/chatbot">
+              <Button size="sm" className="gap-2">
+                <Bot className="h-4 w-4" />
+                Ask AI
+              </Button>
+            </Link>
           </nav>
         </div>
       </header>
