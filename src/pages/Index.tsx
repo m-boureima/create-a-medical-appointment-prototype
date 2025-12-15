@@ -4,7 +4,7 @@ import { Heart, Shield, Clock, Users, Bot, ChevronDown, Stethoscope, Brain, Eye,
 import { Button } from "@/components/ui/button";
 import { DoctorCard } from "@/components/DoctorCard";
 import { SearchBar } from "@/components/SearchBar";
-import { SpecialtyFilter } from "@/components/SpecialtyFilter";
+
 import { AppointmentModal } from "@/components/AppointmentModal";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import {
@@ -209,12 +209,6 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="mb-8">
-            <SpecialtyFilter
-              selected={selectedSpecialty}
-              onSelect={setSelectedSpecialty}
-            />
-          </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {doctors.map((doctor) => (
