@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Shield, Clock, Users, Bot, ChevronDown, Stethoscope, Brain, Eye, Baby, Bone } from "lucide-react";
+import { Heart, Bot, ChevronDown, Stethoscope, Brain, Eye, Baby, Bone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DoctorCard } from "@/components/DoctorCard";
 import { SearchBar } from "@/components/SearchBar";
@@ -72,12 +72,6 @@ const specialties = [
   { id: "orthopedics", name: "Orthopedics", icon: Bone, filter: "Orthopedist" },
 ];
 
-const stats = [
-  { icon: Users, value: "10k+", label: "Patients Served" },
-  { icon: Heart, value: "500+", label: "Expert Doctors" },
-  { icon: Shield, value: "100%", label: "Secure & Private" },
-  { icon: Clock, value: "24/7", label: "Support Available" },
-];
 
 const Index = () => {
   const [specialty, setSpecialty] = useState("");
@@ -177,28 +171,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats as Buttons */}
-      <section className="py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-3">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <Button
-                  key={stat.label}
-                  variant="outline"
-                  className="h-auto py-3 px-5 gap-3 bg-card hover:bg-accent/50 border-border animate-fade-in cursor-default"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <Icon className="w-5 h-5 text-primary" />
-                  <span className="font-bold text-foreground">{stat.value}</span>
-                  <span className="text-muted-foreground text-sm">{stat.label}</span>
-                </Button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* Doctors Section */}
       <section className="py-16 px-4">
