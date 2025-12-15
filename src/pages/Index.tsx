@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Shield, Clock, Users, Bot, ChevronDown } from "lucide-react";
+import { Heart, Shield, Clock, Users, Bot, ChevronDown, Stethoscope, Brain, Eye, Baby, Bone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DoctorCard } from "@/components/DoctorCard";
 import { SearchBar } from "@/components/SearchBar";
@@ -62,6 +62,15 @@ const doctors = [
   },
 ];
 
+const specialties = [
+  { id: "general", name: "General", icon: Stethoscope },
+  { id: "cardiology", name: "Cardiology", icon: Heart },
+  { id: "neurology", name: "Neurology", icon: Brain },
+  { id: "ophthalmology", name: "Eye Care", icon: Eye },
+  { id: "pediatrics", name: "Pediatrics", icon: Baby },
+  { id: "orthopedics", name: "Orthopedics", icon: Bone },
+];
+
 const stats = [
   { icon: Users, value: "10k+", label: "Patients Served" },
   { icon: Heart, value: "500+", label: "Expert Doctors" },
@@ -94,32 +103,30 @@ const Index = () => {
               <span className="font-semibold text-lg text-foreground">MediBook</span>
             </div>
             
-            {/* Doctors Dropdown Menu */}
+            {/* Specialties Dropdown Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground hover:text-foreground">
-                  Our Doctors
+                  Specialties
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-72 bg-popover border border-border">
-                {doctors.map((doctor) => (
-                  <DropdownMenuItem
-                    key={doctor.id}
-                    className="flex items-center gap-3 p-3 cursor-pointer"
-                    onClick={() => handleBookAppointment(doctor)}
-                  >
-                    <img
-                      src={doctor.image}
-                      alt={doctor.name}
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
-                    <div className="flex-1">
-                      <p className="font-medium text-foreground">{doctor.name}</p>
-                      <p className="text-xs text-muted-foreground">{doctor.specialty}</p>
-                    </div>
-                  </DropdownMenuItem>
-                ))}
+              <DropdownMenuContent align="start" className="w-56 bg-popover border border-border">
+                {specialties.map((spec) => {
+                  const Icon = spec.icon;
+                  return (
+                    <DropdownMenuItem
+                      key={spec.id}
+                      className="flex items-center gap-3 p-3 cursor-pointer"
+                      onClick={() => setSelectedSpecialty(spec.id)}
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
+                        <Icon className="w-4 h-4 text-primary" />
+                      </div>
+                      <span className="font-medium text-foreground">{spec.name}</span>
+                    </DropdownMenuItem>
+                  );
+                })}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
