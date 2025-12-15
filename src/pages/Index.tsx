@@ -177,24 +177,23 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-12 border-y border-border bg-card">
+      {/* Stats as Buttons */}
+      <section className="py-8">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-3">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <div 
-                  key={stat.label} 
-                  className="text-center animate-slide-up"
+                <Button
+                  key={stat.label}
+                  variant="outline"
+                  className="h-auto py-3 px-5 gap-3 bg-card hover:bg-accent/50 border-border animate-fade-in cursor-default"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent mb-3">
-                    <Icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </div>
+                  <Icon className="w-5 h-5 text-primary" />
+                  <span className="font-bold text-foreground">{stat.value}</span>
+                  <span className="text-muted-foreground text-sm">{stat.label}</span>
+                </Button>
               );
             })}
           </div>
