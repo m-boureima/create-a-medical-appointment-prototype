@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Shield, Clock, Users, Bot } from "lucide-react";
+import { Heart, Shield, Clock, Users, Bot, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DoctorCard } from "@/components/DoctorCard";
 import { SearchBar } from "@/components/SearchBar";
 import { SpecialtyFilter } from "@/components/SpecialtyFilter";
 import { AppointmentModal } from "@/components/AppointmentModal";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import doctor1 from "@/assets/doctor-1.jpg";
 import doctor2 from "@/assets/doctor-2.jpg";
@@ -80,14 +86,46 @@ const Index = () => {
       {/* Header */}
       <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg gradient-hero flex items-center justify-center">
-              <Heart className="w-4 h-4 text-primary-foreground" />
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg gradient-hero flex items-center justify-center">
+                <Heart className="w-4 h-4 text-primary-foreground" />
+              </div>
+              <span className="font-semibold text-lg text-foreground">MediBook</span>
             </div>
-            <span className="font-semibold text-lg text-foreground">MediBook</span>
+            
+            {/* Doctors Dropdown Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground hover:text-foreground">
+                  Our Doctors
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-72 bg-popover border border-border">
+                {doctors.map((doctor) => (
+                  <DropdownMenuItem
+                    key={doctor.id}
+                    className="flex items-center gap-3 p-3 cursor-pointer"
+                    onClick={() => handleBookAppointment(doctor)}
+                  >
+                    <img
+                      src={doctor.image}
+                      alt={doctor.name}
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                    <div className="flex-1">
+                      <p className="font-medium text-foreground">{doctor.name}</p>
+                      <p className="text-xs text-muted-foreground">{doctor.specialty}</p>
+                    </div>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
+          
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Find Doctors</a>
+            <a href="#doctors" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Find Doctors</a>
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Services</a>
             <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">My Dashboard</Link>
             <Link to="/chatbot">
