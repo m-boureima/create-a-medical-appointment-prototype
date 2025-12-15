@@ -63,12 +63,13 @@ const doctors = [
 ];
 
 const specialties = [
-  { id: "general", name: "General", icon: Stethoscope },
-  { id: "cardiology", name: "Cardiology", icon: Heart },
-  { id: "neurology", name: "Neurology", icon: Brain },
-  { id: "ophthalmology", name: "Eye Care", icon: Eye },
-  { id: "pediatrics", name: "Pediatrics", icon: Baby },
-  { id: "orthopedics", name: "Orthopedics", icon: Bone },
+  { id: "all", name: "All", icon: Stethoscope, filter: "" },
+  { id: "general", name: "General", icon: Stethoscope, filter: "General Practitioner" },
+  { id: "cardiology", name: "Cardiology", icon: Heart, filter: "Cardiologist" },
+  { id: "neurology", name: "Neurology", icon: Brain, filter: "Neurologist" },
+  { id: "ophthalmology", name: "Eye Care", icon: Eye, filter: "Ophthalmologist" },
+  { id: "pediatrics", name: "Pediatrics", icon: Baby, filter: "Pediatrician" },
+  { id: "orthopedics", name: "Orthopedics", icon: Bone, filter: "Orthopedist" },
 ];
 
 const stats = [
@@ -81,7 +82,12 @@ const stats = [
 const Index = () => {
   const [specialty, setSpecialty] = useState("");
   const [location, setLocation] = useState("");
-  const [selectedSpecialty, setSelectedSpecialty] = useState("general");
+  const [selectedSpecialty, setSelectedSpecialty] = useState("all");
+
+  const selectedSpec = specialties.find(s => s.id === selectedSpecialty);
+  const filteredDoctors = selectedSpecialty === "all" 
+    ? doctors 
+    : doctors.filter(d => d.specialty === selectedSpec?.filter);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState<typeof doctors[0] | null>(null);
 
@@ -211,13 +217,19 @@ const Index = () => {
 
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {doctors.map((doctor) => (
-              <DoctorCard
-                key={doctor.id}
-                {...doctor}
-                onBook={() => handleBookAppointment(doctor)}
-              />
-            ))}
+            {filteredDoctors.length > 0 ? (
+              filteredDoctors.map((doctor) => (
+                <DoctorCard
+                  key={doctor.id}
+                  {...doctor}
+                  onBook={() => handleBookAppointment(doctor)}
+                />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-muted-foreground">Aucun médecin trouvé pour cette spécialité.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
